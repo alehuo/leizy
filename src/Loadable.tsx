@@ -1,8 +1,8 @@
 import React from 'react';
 
 export interface LoadableProps {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    children: any;
+    children?: React.ReactChild | React.ReactChild[];
+    fallback?: React.ReactElement;
 }
 
 export const Loadable: React.FC<LoadableProps> = ({ children }) => {
