@@ -1,3 +1,10 @@
-import React from "react";
+import React from 'react';
 
-export const Loadable: React.FC<any> = () => <div>Hello world</div>;
+export interface LoadableProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    children: any;
+}
+
+export const Loadable: React.FC<LoadableProps> = ({ children }) => {
+    return <>{children}</>;
+};
