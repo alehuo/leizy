@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useIntersect from './useIntersect';
+import { useIntersect } from './useIntersect';
 
 export interface LoadableProps {
     children?: React.ReactChild;
@@ -9,7 +9,7 @@ export interface LoadableProps {
     isVisible?: boolean;
 }
 
-const helper = (
+const showComponent = (
     visible: boolean,
     fallback?: React.ReactElement,
     component?: React.ReactElement,
@@ -79,11 +79,11 @@ export const Loadable: React.FC<LoadableProps> = ({ children, fallback, componen
     // Also, observing the intersection of the component is no longer necessary
     return firstTimeRender === true ? (
         <div style={{ display: 'inline-block', padding: 0, margin: 0 }}>
-            {helper(true, fallback, component, children)}
+            {showComponent(true, fallback, component, children)}
         </div>
     ) : (
         <div
-            ref={elem => {
+            ref={(elem) => {
                 // Set a ref for the intersection observer
                 if (elem !== null) {
                     setNode(elem);
@@ -91,7 +91,7 @@ export const Loadable: React.FC<LoadableProps> = ({ children, fallback, componen
             }}
             style={{ display: 'inline-block', padding: 0, margin: 0 }}
         >
-            {helper(canShow, fallback, component, children)}
+            {showComponent(canShow, fallback, component, children)}
         </div>
     );
 };

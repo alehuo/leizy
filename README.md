@@ -63,7 +63,7 @@ import { Loadable } from 'leizy';
 const LazyLoadedCatPictureContainer = () => <Loadable threshold={0.8}><CatPicture/></Loadable>
 ```
 
-Leizy is extremely useful if you want to implement a scrolling view or your page has so much content that it needs to be scrolled down.
+Leizy is extremely powerful if you want to implement a scrolling view or your page has so much content that it needs to be scrolled down.
 
 ## Known issues
 

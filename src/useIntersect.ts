@@ -8,7 +8,7 @@ interface UseIntersectParams {
 
 // https://medium.com/the-non-traditional-developer/how-to-use-an-intersectionobserver-in-a-react-hook-9fb061ac6cb5
 
-const useIntersect = ({
+export const useIntersect = ({
     root = null,
     rootMargin,
     threshold = 0,
@@ -37,5 +37,3 @@ const useIntersect = ({
 
     return [setElement, entry];
 };
-
-export default useIntersect;
