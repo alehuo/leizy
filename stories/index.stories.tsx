@@ -25,12 +25,12 @@ storiesOf('Loadable', module)
     ))
     .add('Single loadable component with other components #1', () => (
         <Scroll>
-            {range(10).map(() => (
-                <Placeholder />
+            {range(10).map((_val,i) => (
+                <Placeholder key={i}/>
             ))}
             <Loadable fallback={<Fallback />} component={<LoadedPlaceholder />} />
-            {range(5).map(() => (
-                <Placeholder />
+            {range(5).map((_val, i) => (
+                <Placeholder key={10 + i}/>
             ))}
         </Scroll>
     ))
@@ -82,6 +82,7 @@ storiesOf('Loadable', module)
         </Scroll>
     ))
     .add('Error case 1, with multiple children', () => (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
         <Loadable fallback={<Fallback />}>
             <LoadedPlaceholder />
@@ -90,9 +91,10 @@ storiesOf('Loadable', module)
     ))
     .add('Error case 2, with multiple components in fallback prop', () => (
         <Loadable
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
-            fallback={[0, 1].map(() => (
-                <Fallback />
+            fallback={[0, 1].map((_val, i) => (
+                <Fallback key={i}/>
             ))}
         >
             <LoadedPlaceholder />
@@ -100,9 +102,10 @@ storiesOf('Loadable', module)
     ))
     .add('Error case 3, with multiple components in component prop', () => (
         <Loadable
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
-            component={[0, 1].map(() => (
-                <Fallback />
+            component={[0, 1].map((_val, i) => (
+                <Fallback key={i}/>
             ))}
         />
     ));

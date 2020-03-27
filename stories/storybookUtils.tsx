@@ -27,11 +27,11 @@ export const Scroll: React.FC = ({ children }) => (
 );
 
 const mockRequest = () =>
-    new Promise<string>((resolve, reject) => setTimeout(() => resolve('Yeah!'), 500 + Math.random() * 1200));
+    new Promise<string>((resolve, _reject) => setTimeout(() => resolve('Yeah!'), 500 + Math.random() * 1200));
 
 export const MockedFetchComponent: React.FC = () => {
     const [requestData, setRequestData] = useState('');
-    let isLoaded = true;
+    const isLoaded = true;
     useEffect(() => {
         mockRequest().then(res => {
             if (isLoaded) {
