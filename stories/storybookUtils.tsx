@@ -26,16 +26,6 @@ export const Scroll: React.FC = ({ children }) => (
     <div style={{ height: 400, width: '50%', overflowY: 'scroll' }}>{children}</div>
 );
 
-/*
-const fetchCatData = async () => {
-    const req = await axios.get('https://thecatapi.com/v1/images', {
-        headers: {
-            'x-api-key': '',
-        },
-    });
-    console.log(req.data);
-};
-*/
 const mockRequest = () =>
     new Promise<string>((resolve, reject) => setTimeout(() => resolve('Yeah!'), 500 + Math.random() * 1200));
 
