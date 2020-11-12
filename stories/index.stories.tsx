@@ -17,7 +17,7 @@ const styles = {
     width: 120,
     height: 120,
     margin: 10
-}
+};
 
 storiesOf('Loadable', module)
     .add('Single loadable component', () => (
@@ -96,7 +96,7 @@ storiesOf('Loadable', module)
     ))
     .add('Error case 2, with multiple components in fallback prop', () => (
         <Loadable
-            // @ts-expect-error
+            // @ts-expect-error Should throw
             fallback={[0, 1].map((_val, i) => (
                 <Fallback key={i}/>
             ))}
@@ -107,7 +107,7 @@ storiesOf('Loadable', module)
     ))
     .add('Error case 3, with multiple components in component prop', () => (
         <Loadable
-            // @ts-expect-error
+            // @ts-expect-error Should throw
             component={[0, 1].map((_val, i) => (
                 <Fallback key={i}/>
             ))}

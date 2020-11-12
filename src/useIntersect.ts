@@ -12,8 +12,8 @@ export const useIntersect = ({
     root = null,
     rootMargin,
     threshold = 0,
-}: UseIntersectParams): [React.Dispatch<Element>, IntersectionObserverEntry | {}] => {
-    const [entry, updateEntry] = useState<IntersectionObserverEntry | {}>({});
+}: UseIntersectParams): [React.Dispatch<Element>, IntersectionObserverEntry | Record<string, unknown>] => {
+    const [entry, updateEntry] = useState<IntersectionObserverEntry | Record<string, unknown>>({});
     const [element, setElement] = useState<Element | null>(null);
 
     const intersectionObserver = useRef(

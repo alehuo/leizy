@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export const range = (len: number) => [...Array(len).keys()];
+export const range = (len: number) => [...Array.from(Array(len).keys())];
 
 export const Placeholder: React.FC = () => (
     <div style={{ width: 120, height: 120, background: 'yellow', display: 'inline-block', margin: 10 }}>
