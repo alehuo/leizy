@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { useIntersect } from './useIntersect';
 
-export interface LoadableProps {
-    children?: React.ReactChild;
+export type LoadableProps = {
     fallback?: React.ReactElement;
     threshold?: number;
     component?: React.ReactElement;
     isVisible?: boolean;
-}
+} & { style?: Partial<Omit<React.CSSProperties, "width" | "height">> & Pick<React.CSSProperties, "width" | "height"> };
 
 const showComponent = (
     visible: boolean,
     fallback?: React.ReactElement,
     component?: React.ReactElement,
-    children?: React.ReactChild,
+    children?: React.ReactNode,
 ) => {
     if (!visible) {
         if (fallback === undefined) {
@@ -28,7 +27,7 @@ const showComponent = (
     if (component !== undefined) {
         return component;
     }
-    return <div />;
+    return <></>;
 };
 
 /**
@@ -37,7 +36,7 @@ const showComponent = (
  * @param component Render component
  * @param children Render component (as a children of the Loadable component)
  */
-const check = (fallback?: React.ReactElement, component?: React.ReactElement, children?: React.ReactChild) => {
+const check = (fallback?: React.ReactElement, component?: React.ReactElement, children?: React.ReactNode) => {
     if (children !== undefined && Array.isArray(children)) {
         throw new Error(
             '<Loadable/> excepts its ´children´ prop to be a single React element. Remember to wrap your child elements into a fragment or something else, if you are supposed to lazy load multiple instances of the child components at once.',
@@ -58,7 +57,7 @@ const check = (fallback?: React.ReactElement, component?: React.ReactElement, ch
 /**
  * Loadable component.
  */
-export const Loadable: React.FC<LoadableProps> = ({ children, fallback, component, threshold = 0.8 }) => {
+export const Loadable: React.FC<LoadableProps> = ({ children, fallback, component, threshold = 0.8, style }) => {
     // Check for prop errors
     check(fallback, component, children);
 
@@ -77,8 +76,8 @@ export const Loadable: React.FC<LoadableProps> = ({ children, fallback, componen
 
     // If we have rendered the component for the first time, there is no need to show the fallback component.
     // Also, observing the intersection of the component is no longer necessary
-    return firstTimeRender === true ? (
-        <div style={{ display: 'inline-block', padding: 0, margin: 0 }}>
+    return firstTimeRender ? (
+        <div style={{ ...style }}>
             {showComponent(true, fallback, component, children)}
         </div>
     ) : (
@@ -89,8 +88,7 @@ export const Loadable: React.FC<LoadableProps> = ({ children, fallback, componen
                     setNode(elem);
                 }
             }}
-            style={{ display: 'inline-block', padding: 0, margin: 0 }}
-        >
+            style={{ ...style }}>
             {showComponent(canShow, fallback, component, children)}
         </div>
     );

@@ -12,6 +12,13 @@ import {
     range,
 } from './storybookUtils';
 
+const styles = {
+    display: "inline-block",
+    width: 120,
+    height: 120,
+    margin: 10
+}
+
 storiesOf('Loadable', module)
     .add('Single loadable component', () => (
         <Loadable>
@@ -39,7 +46,7 @@ storiesOf('Loadable', module)
             {range(10).map(num => (
                 <Placeholder key={num} />
             ))}
-            <Loadable fallback={<Fallback />}>
+            <Loadable fallback={<Fallback />} style={styles}>
                 <LoadedPlaceholder />
             </Loadable>
             {range(5).map(num => (
@@ -50,11 +57,11 @@ storiesOf('Loadable', module)
     .add('Single loadable component with other components #3', () => (
         <Scroll>
             {range(50).map(num => (
-                <Loadable fallback={<Fallback />} key={num}>
+                <Loadable fallback={<Fallback />} key={num} style={styles}>
                     <LoadedPlaceholder />
                 </Loadable>
             ))}
-            <Loadable fallback={<Fallback />} key={100}>
+            <Loadable fallback={<Fallback />} key={100} style={styles}>
                 <Counter />
             </Loadable>
         </Scroll>
@@ -64,7 +71,7 @@ storiesOf('Loadable', module)
             {range(10).map(num => (
                 <Placeholder key={num} />
             ))}
-            <Loadable fallback={<Fallback />}>
+            <Loadable fallback={<Fallback />} style={styles}>
                 <LoadedPlaceholder />
             </Loadable>
             {range(5).map(num => (
@@ -75,37 +82,35 @@ storiesOf('Loadable', module)
     .add('Multiple loadable components that fetch data', () => (
         <Scroll>
             {range(100).map(num => (
-                <Loadable fallback={<Fallback />} key={num}>
+                <Loadable fallback={<Fallback />} key={num} style={styles}>
                     <MockedFetchComponent />
                 </Loadable>
             ))}
         </Scroll>
     ))
     .add('Error case 1, with multiple children', () => (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-        // @ts-ignore
-        <Loadable fallback={<Fallback />}>
+        <Loadable fallback={<Fallback />} style={styles}>
             <LoadedPlaceholder />
             <LoadedPlaceholder />
         </Loadable>
     ))
     .add('Error case 2, with multiple components in fallback prop', () => (
         <Loadable
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-            // @ts-ignore
+            // @ts-expect-error
             fallback={[0, 1].map((_val, i) => (
                 <Fallback key={i}/>
             ))}
+            style={styles}
         >
             <LoadedPlaceholder />
         </Loadable>
     ))
     .add('Error case 3, with multiple components in component prop', () => (
         <Loadable
-            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-            // @ts-ignore
+            // @ts-expect-error
             component={[0, 1].map((_val, i) => (
                 <Fallback key={i}/>
             ))}
+            style={styles}
         />
     ));
